@@ -148,6 +148,7 @@
     <ClCompile Include="008string_stringliteral.cpp" />
     <ClCompile Include="009const.cpp" />
     <ClCompile Include="010lambda_mutable.cpp" />
+    <ClCompile Include="011initClassMember_createInstance.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="demoStatic.h" />

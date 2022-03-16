@@ -45,6 +45,9 @@
     <ClCompile Include="010lambda_mutable.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="011initClassMember_createInstance.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="demoStatic.h">
