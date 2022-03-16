@@ -145,6 +145,9 @@
     <ClCompile Include="005inherice.cpp" />
     <ClCompile Include="006virtual_interface.cpp" />
     <ClCompile Include="007visibility_array.cpp" />
+    <ClCompile Include="008string_stringliteral.cpp" />
+    <ClCompile Include="009const.cpp" />
+    <ClCompile Include="010lambda_mutable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="demoStatic.h" />

@@ -36,6 +36,15 @@
     <ClCompile Include="007visibility_array.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="008string_stringliteral.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="009const.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="010lambda_mutable.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="demoStatic.h">

@@ -29,7 +29,7 @@ void PrintName(Entity* en) {
   cout << en->GetName() << endl;
 }
 
-int main() {
+int main2() {
 
   Entity* e = new Entity();
   PrintName(e);
@@ -37,4 +37,6 @@ int main() {
   Player* p = new Player("Lirenjie");
   PrintName(p);  // 此处如果不给需要复写的方法加virtual，就还是打印entity
   // 为了了代码可读性，我们最好还是给加上override
+
+  return 0;
 }
