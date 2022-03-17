@@ -1,7 +1,5 @@
 #include<iostream>;
 
-
-
 class Entity012 {
 
 private:
@@ -10,12 +8,13 @@ private:
 public:
   Entity012(const std::string& name):m_name(name),m_Age(-1){}
 
-  Entity012(int age) :m_Age(age) {}
+  Entity012(int age) :m_Age(age) {
+    
+  }
 };
 
-void printEntiry(const Entity012& enc) {
+void printEntiry(const Entity012& e) {}
 
-}
 
 int main() {
   /*
