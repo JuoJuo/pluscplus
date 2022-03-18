@@ -63,7 +63,10 @@
     <ClCompile Include="016vector.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="017howtoincludelib.cpp">
+    <ClCompile Include="017howtoincludelib_includeotherProject.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="018multiplereturn.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

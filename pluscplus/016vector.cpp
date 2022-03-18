@@ -15,13 +15,20 @@ std::ostream& operator<<(std::ostream& stream, const Vertex& vertex) {
 }
 
 
-// vertices传给函数当参数，也要时刻考虑对象拷贝的问题，是不是要传引用
+/*
+vertices传给函数当参数，也要时刻考虑对象拷贝的问题，是不是要传引用
+*/ 
 int main016() {
-  /*   std::vector<*Vertex> vertices 注意这个哦。在不同地址的内存，释放内存也是自动跟手动的区别哦*/
+  /*
+  std::vector<*Vertex> vertices 注意这个哦。在不同地址的内存，释放内存也是自动跟手动的区别哦
+
+  */
   std::vector<Vertex> vertices;
 
   /*
-   隐含创建的是堆栈对象额！
+
+  隐含创建的是堆栈对象额！
+
   */
   vertices.push_back({ 1,2,3 });
   vertices.push_back({ 4,5,6 });
@@ -35,7 +42,7 @@ int main016() {
   /*
    始终记住，C++变量赋值，都会是拷贝！所以我们能用&就用&，const也是，能用就用
   */
-  for (const Vertex& v: vertices)
+  for (const Vertex& v : vertices)
   {
     std::cout << v << std::endl;
   }
@@ -66,9 +73,9 @@ int main016() {
   std::vector<Vertex> v2;
   v2.reserve(888);
 
-  v2.emplace_back(1, 2, 3);
-  v2.emplace_back(11, 22, 33);
-  v2.emplace_back(11, 22, 33);
+ // v2.emplace_back(1, 2, 3);
+ // v2.emplace_back(11, 22, 33);
+ // v2.emplace_back(11, 22, 33);
 
 
   //std::vector<Vertex&> v3;
