@@ -1,14 +1,15 @@
 #include<iostream>
 /*
 
-  operator
-  每个变量名可以看成就是一个地址。
+  - operator
 
-  只不过访问的时候，有些类型的变量里（地址对应的内存）存的是业务数据，有些还是存的地址。
+  - 每个变量名可以看成就是一个地址。
 
+  - 只不过访问的时候，有些类型的变量里（地址对应的内存）存的是业务数据，有些还是存的地址。
 
-  code里的 var a = b，默认都是对地址里直接存的东西的赋值。
-  那如果想对变量本身赋值怎么办？&variable
+  - code里的 var a = b，默认都是对地址里直接存的东西的赋值。
+
+  - 那如果想对变量本身赋值怎么办？&variable
 */
 
 /*
@@ -22,16 +23,16 @@ int* getArr() {
 }
 
 class Jack {
-public:
-  Jack()
-  {
-    std::cout << "created";
-  }
+  public:
+    Jack()
+    {
+      std::cout << "created";
+    }
 
-  ~Jack()
-  {
-    std::cout << "deleted";
-  }
+    ~Jack()
+    {
+      std::cout << "deleted";
+    }
 };
 
 class ScopedPtr {
@@ -53,7 +54,7 @@ void test()
 
      自己释放了内存
   */
-  ScopedPtr autoDelete = new A();
+  ScopedPtr autoDelete = new Jack();
 }
 
 void smartPointer() {

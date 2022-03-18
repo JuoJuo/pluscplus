@@ -16,7 +16,7 @@ public:
 void printEntiry(const Entity012& e) {}
 
 
-int main() {
+int main012() {
   /*
     自带隐式数据类型转换。
   */

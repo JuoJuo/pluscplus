@@ -87,6 +87,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -113,6 +114,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,6 +152,11 @@
     <ClCompile Include="010lambda_mutable.cpp" />
     <ClCompile Include="011initClassMember_createInstance.cpp" />
     <ClCompile Include="012explicit.cpp" />
+    <ClCompile Include="013smartPointer.cpp" />
+    <ClCompile Include="014copyObj.cpp" />
+    <ClCompile Include="015arrowoperator.cpp" />
+    <ClCompile Include="016vector.cpp" />
+    <ClCompile Include="017howtoincludelib.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="demoStatic.h" />
