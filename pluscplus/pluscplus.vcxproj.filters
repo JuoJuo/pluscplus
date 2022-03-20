@@ -69,6 +69,39 @@
     <ClCompile Include="018multiplereturn.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="019template.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="020Macros.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="021auto.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="022array.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="023functionPoointer_labmda.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="024namespace.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="025thread.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="026time.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="027多维数组cpu缓存.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="028Union.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="029casting.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="demoStatic.h">

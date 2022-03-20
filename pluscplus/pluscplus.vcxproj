@@ -164,6 +164,17 @@
     <ClCompile Include="016vector.cpp" />
     <ClCompile Include="017howtoincludelib_includeotherProject.cpp" />
     <ClCompile Include="018multiplereturn.cpp" />
+    <ClCompile Include="019template.cpp" />
+    <ClCompile Include="020Macros.cpp" />
+    <ClCompile Include="021auto.cpp" />
+    <ClCompile Include="022array.cpp" />
+    <ClCompile Include="023functionPoointer_labmda.cpp" />
+    <ClCompile Include="024namespace.cpp" />
+    <ClCompile Include="025thread.cpp" />
+    <ClCompile Include="026time.cpp" />
+    <ClCompile Include="027多维数组cpu缓存.cpp" />
+    <ClCompile Include="028Union.cpp" />
+    <ClCompile Include="029casting.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="demoStatic.h" />
