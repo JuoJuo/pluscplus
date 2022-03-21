@@ -2,7 +2,7 @@
 
 
 
-int main() {
+int main029() {
   double value = 5.25;
 
   /*
