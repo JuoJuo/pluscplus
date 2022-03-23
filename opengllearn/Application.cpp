@@ -209,7 +209,7 @@ int main(void)
     */
     // glDrawArrays(GL_TRIANGLES, 0, 3);
 
-    GLCall(glDrawElements(GL_TRIANGLES, 6, GL_INT, nullptr));
+    GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
 
     /* Swap front and back buffers */
     GLCall(glfwSwapBuffers(window));
