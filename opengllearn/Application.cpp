@@ -1,7 +1,42 @@
 #include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <fstream>
+#include <sstream>
 
+struct ShaderProgramSource {
+  std::string VertexSource;
+  std::string FragmentSource;
+};
+
+static ShaderProgramSource ParseShader(const std::string& filepath) {
+  std::ifstream stream(filepath);
+  enum class ShaderType
+  {
+    NONE = -1, VERTEX = 0, FRAGMENT = 1,
+  };
+  std::string line;
+  std::stringstream ss[2];
+
+  ShaderType type = ShaderType::NONE;
+
+  while (getline(stream, line)) {
+    if (line.find("#shader") != std::string::npos) {
+      if (line.find("vertex") != std::string::npos) {
+        type = ShaderType::VERTEX;
+      }
+
+      else if (line.find("fragment") != std::string::npos) {
+        type = ShaderType::FRAGMENT;
+      }
+    }
+    else {
+      ss[(int)type] << line << '\n';
+    }
+  }
+
+  return { ss[0].str(), ss[1].str() };
+}
 /*
   vertex shader 有多少个vertex就调用多少次。
   fragment shader 目前可以理解为有多少个px就调用多少次。
@@ -115,44 +150,9 @@ int main(void)
   glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
 
 
-  /*
-    330 gl shader language 330版本
+  ShaderProgramSource source = ParseShader("res/basic.shader");
 
-    core不允许使用过期函数
-
-    layout(location=0)是glVertexAttribPointer第一个参数。表示从第几个点开始接收
-
-    gl_Position是固定的变量名字，接收vec4类型.
-
-    我们注意到此处我们是vec2，赋值的时候还得调用具体的函数转换，所以就直接定义为vec4了
-  */
-
-  std::string vertexShader =
-    "#version 330 core\n"
-    "\n"
-    "layout(location = 0) in vec4 position;\n"
-    "\n"
-    "void main()\n"
-    "{\n"
-    " gl_Position = position;\n"
-    "}\n";
-
-
-  /*
-
-    color rgba  0-255 映射为  0-1
-  */
-  std::string fragmentShader =
-    "#version 330 core\n"
-    "\n"
-    "layout(location = 0) out vec4 color;\n"
-    "\n"
-    "void main()\n"
-    "{\n"
-    " color = vec4(1.0, 0.0, 0.0, 1.0);\n"
-    "}\n";
-
-  unsigned int id_program = CreateShader(vertexShader, fragmentShader);
+  unsigned int id_program = CreateShader(source.VertexSource, source.FragmentSource);
   glUseProgram(id_program);
   /* Loop until the user closes the window */
   while (!glfwWindowShouldClose(window))
