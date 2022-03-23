@@ -100,7 +100,7 @@ int main(void)
   glBindBuffer(GL_ARRAY_BUFFER, bufferID);
 
   /* GL_STATIC_DRAW The data store contents will be modified once and used many times. */ 
-  glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(6), positions, GL_STATIC_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW);
 
   /* 要让指定的顶点属性生效，的手动调用enable。并传入从第几个索引开始enable */
   glEnableVertexAttribArray(0);
