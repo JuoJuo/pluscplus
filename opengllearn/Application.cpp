@@ -4,6 +4,22 @@
 #include <fstream>
 #include <sstream>
 
+/*
+  __debugbreak, visual studio 编译器自带的
+ 
+*/
+#define ASSERT(x) if(!(x)) __debugbreak();
+
+static void GLClearError() {
+  while (glGetError() != GL_NO_ERROR);
+}
+
+static void GLCheckError() {
+  while (GLenum error = glGetError()) {
+    std::cout << "[OpenGL Error] (" << error << ")" << std::endl;
+  }
+}
+
 struct ShaderProgramSource {
   std::string VertexSource;
   std::string FragmentSource;
@@ -185,8 +201,10 @@ int main(void)
       以及有几个点
     */
     // glDrawArrays(GL_TRIANGLES, 0, 3);
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
+    GLClearError();
+    glDrawElements(GL_TRIANGLES, 6, GL_INT, nullptr);
+    GLCheckError();
     /* Swap front and back buffers */
     glfwSwapBuffers(window);
 
