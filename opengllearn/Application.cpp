@@ -5,19 +5,26 @@
 #include <sstream>
 
 /*
-  __debugbreak, visual studio 编译器自带的
- 
+  __debugbreak, visual studio 编译器自带的,自动进入断点
+  __FILE__  __LINE__ 也是编译器自己支持的
+
+  #x把传进来的东西不当代码替换，二十转成字符串
 */
 #define ASSERT(x) if(!(x)) __debugbreak();
+#define GLCall(x) GLClearError();\
+x;\
+ASSERT(GLLogCall(#x, __FILE__, __LINE__));
 
 static void GLClearError() {
   while (glGetError() != GL_NO_ERROR);
 }
 
-static void GLCheckError() {
+static bool GLLogCall(const char* function, const char* file, int line) {
   while (GLenum error = glGetError()) {
-    std::cout << "[OpenGL Error] (" << error << ")" << std::endl;
+    std::cout << "[OpenGL Error] (" << error << ")" << function << "  " << file << "  " << line << std::endl;
+    return false;
   }
+  return true;
 }
 
 struct ShaderProgramSource {
@@ -154,15 +161,15 @@ int main(void)
   /*
     生成几个缓冲区，给一个引用用于返回缓冲区ID
   */
-  glGenBuffers(1, &bufferID);
+  GLCall(glGenBuffers(1, &bufferID));
 
-  glBindBuffer(GL_ARRAY_BUFFER, bufferID);
+  GLCall(glBindBuffer(GL_ARRAY_BUFFER, bufferID));
 
-  /* GL_STATIC_DRAW The data store contents will be modified once and used many times. */ 
-  glBufferData(GL_ARRAY_BUFFER, 8 * sizeof(float), positions, GL_STATIC_DRAW);
+  /* GL_STATIC_DRAW The data store contents will be modified once and used many times. */
+  GLCall(glBufferData(GL_ARRAY_BUFFER, 8 * sizeof(float), positions, GL_STATIC_DRAW));
 
   /* 要让指定的顶点属性生效，的手动调用enable。并传入从第几个索引开始enable */
-  glEnableVertexAttribArray(0);
+  GLCall(glEnableVertexAttribArray(0));
   /*
   从第几个索引开始，
   几个元素表示位置属性，
@@ -171,30 +178,30 @@ int main(void)
   以及每个vertex的长度。（不一定vertex只有位置，还有纹理法线之类的）只不过demo中只有位置，刚起步嘛，简单点。
   第几个字节的位置开始就是纹理法线之类的数据。这里没有纹理法线数据，就写0.
   */
-  glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
+  GLCall(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0));
 
 
   unsigned int ibo;
-  glGenBuffers(1, &ibo);
+  GLCall(glGenBuffers(1, &ibo));
 
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+  GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo));
 
   /*
     跟vertex缓冲区差不多。都是要指定数据占的大小。数据的指针，以及偏移量或者静态绘制还是动态绘制
     索引缓冲区就得传GL_ELEMENT_ARRAY_BUFFER， indictes里所有数据占的空间，indictes指针， indictes里偏移量
   */
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indictes, GL_STATIC_DRAW);
+  GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indictes, GL_STATIC_DRAW));
 
 
   ShaderProgramSource source = ParseShader("res/basic.shader");
 
   unsigned int id_program = CreateShader(source.VertexSource, source.FragmentSource);
-  glUseProgram(id_program);
+  GLCall(glUseProgram(id_program));
   /* Loop until the user closes the window */
   while (!glfwWindowShouldClose(window))
   {
     /* Render here */
-    glClear(GL_COLOR_BUFFER_BIT);
+    GLCall(glClear(GL_COLOR_BUFFER_BIT));
 
     /*
       缓冲区bind了，数据指定了，发出画的指令了，因为要求是一维数组（高性能），所以得指定从第几个索引开始画
@@ -202,16 +209,15 @@ int main(void)
     */
     // glDrawArrays(GL_TRIANGLES, 0, 3);
 
-    GLClearError();
-    glDrawElements(GL_TRIANGLES, 6, GL_INT, nullptr);
-    GLCheckError();
+    GLCall(glDrawElements(GL_TRIANGLES, 6, GL_INT, nullptr));
+
     /* Swap front and back buffers */
-    glfwSwapBuffers(window);
+    GLCall(glfwSwapBuffers(window));
 
     /* Poll for and process events */
-    glfwPollEvents();
+    GLCall(glfwPollEvents());
   }
-  glDeleteProgram(id_program);
-  glfwTerminate();
+  GLCall(glDeleteProgram(id_program));
+  GLCall(glfwTerminate());
   return 0;
 }
