@@ -134,6 +134,11 @@ int main(void)
   /* Make the window's context current */
   glfwMakeContextCurrent(window);
 
+  /*
+     开启垂直同步，就是怕在不断的循环里，闪得太快
+  */
+  glfwSwapInterval(1);
+
   GLenum err = glewInit();
   if (GLEW_OK != err)
   {
@@ -197,11 +202,21 @@ int main(void)
 
   unsigned int id_program = CreateShader(source.VertexSource, source.FragmentSource);
   GLCall(glUseProgram(id_program));
+
+  GLCall(int location = glGetUniformLocation(id_program, "u_Color"));
+  ASSERT(location != -1);
+  GLCall(glUniform4f(location, 0.2f, 0.3f, 0.8f, 1.0f));
+
+  float r = 0.0f;
+  float increament = 0.05f;
   /* Loop until the user closes the window */
   while (!glfwWindowShouldClose(window))
   {
     /* Render here */
     GLCall(glClear(GL_COLOR_BUFFER_BIT));
+
+
+    GLCall(glUniform4f(location, r, 0.3f, 0.8f, 1.0f));
 
     /*
       缓冲区bind了，数据指定了，发出画的指令了，因为要求是一维数组（高性能），所以得指定从第几个索引开始画
@@ -211,6 +226,12 @@ int main(void)
 
     GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
 
+    if (r > 1.0f)
+      increament = -0.05f;
+    else if (r < 0.0f)
+      increament = 0.05f;
+
+    r += increament;
     /* Swap front and back buffers */
     GLCall(glfwSwapBuffers(window));
 
