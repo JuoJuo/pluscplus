@@ -223,10 +223,8 @@ int main(void)
     /* Render here */
     GLCall(glClear(GL_COLOR_BUFFER_BIT));
 
-    
-
-    GLCall(glUniform4f(location, r, 0.3f, 0.8f, 1.0f));
     GLCall(glUseProgram(id_program));
+    GLCall(glUniform4f(location, r, 0.3f, 0.8f, 1.0f));
     GLCall(glBindBuffer(GL_ARRAY_BUFFER, bufferID));
     GLCall(glEnableVertexAttribArray(0));
     GLCall(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0));
