@@ -12,3 +12,18 @@ glEnableVertexAttribArray
 glVertexAttribPointer
 
 index array buffer就一行代码glBindBuffer就完了
+
+
+默认使用的是兼容性opengl 配置文件GLFW_OPENGL_COMPAT_PROFILE，内部会自己给创建一个vertex array object
+如果使用GLFW_OPENGL_CORE_PROFILE，就得手动创建绑定一个。
+至于为什么，好像是
+
+GL_ARRAY_BUFFER就是我们glGenVertexArrays生成的那个
+
+glBindBuffer(GL_ARRAY_BUFFER, bufferID)
+glEnableVertexAttribArray(0)
+
+这句才实际绑定了这个buffer跟GL_ARRAY_BUFFER，所谓绑定好像是说GL_ARRAY_BUFFER[0（第一个参数）]就对应这个buffer，
+别的可能是1 2 3 4
+glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0)
+
