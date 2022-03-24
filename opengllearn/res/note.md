@@ -6,7 +6,7 @@ index array buffer 因为所有的东西都是三角形组成的，如果我们�
 。
 
 
-特别的对于vertext array的绑定，实际上需要三行代码
+特别的对于vertext array的绑定，实际上需要三行代码(使用vao后就不用每次设置这三行了，直接bindVertexArray就行了)
 glBindBuffer
 glEnableVertexAttribArray
 glVertexAttribPointer
@@ -26,4 +26,6 @@ glEnableVertexAttribArray(0)
 这句才实际绑定了这个buffer跟GL_ARRAY_BUFFER，所谓绑定好像是说GL_ARRAY_BUFFER[0（第一个参数）]就对应这个buffer，
 别的可能是1 2 3 4
 glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0)
+
+
 
