@@ -29,3 +29,7 @@ glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0)
 
 
 
+- VertexBuffer就是自己生成一个vertexbuffer 并且绑定， 然后设置buffer数据的
+- IndexBuffer就是自己生成一个IndexBuffer 并且绑定， 然后设置索引数据，跟索引（顶点）个数的。
+- layout就是记录创建的vertexbuffer的数据布局的。
+（在va的第几个索引，元素一组有几个。元素类型。是否需要GPU帮把数据转到0-1之间，占过少个字节，以及每个vertex之间偏移量）
