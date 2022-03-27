@@ -6,6 +6,7 @@
 #include "Renderer.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
+#include "VertexArray.h"
 
 struct ShaderProgramSource {
   std::string VertexSource;
@@ -143,15 +144,15 @@ int main(void)
     2, 3, 0
   };
 
-  unsigned int vao;
-  GLCall(glGenVertexArrays(1, &vao));
-  GLCall(glBindVertexArray(vao));
-
+  VertexArray va;
   VertexBuffer vb(positions, 8 * sizeof(float));
 
-  GLCall(glEnableVertexAttribArray(0));
-
-  GLCall(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0));
+  VertexBufferLayout layout;
+  /*
+    vb 顶点数据是 位置占几个元素，是float还是别的。
+  */
+  layout.Push<float>(2);
+  va.AddBuffer(vb, layout);
 
   IndexBuffer ib(indictes, 6);
 
@@ -179,7 +180,8 @@ int main(void)
     GLCall(glUseProgram(id_program));
     GLCall(glUniform4f(location, r, 0.3f, 0.8f, 1.0f));
 
-    GLCall(glBindVertexArray(vao));
+    // GLCall(glBindVertexArray(vao));
+    va.Bind();
     ib.Bind();
 
     GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
