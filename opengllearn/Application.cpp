@@ -9,6 +9,7 @@
 #include "IndexBuffer.h"
 #include "VertexArray.h"
 #include "Shader.h"
+#include "Texture.h"
 
 int main(void)
 {
@@ -46,11 +47,11 @@ int main(void)
   }
   std::cout << glGetString(GL_VERSION);
 
-  float positions[8] = {
-    -0.5f, -0.5f,
-     0.5f, -0.5f,
-     0.5f, 0.5f,
-    -0.5f, 0.5f
+  float positions[] = {
+    -0.5f, -0.5f, 0.0f, 0.0f,
+     0.5f, -0.5f, 1.0f, 0.0f,
+     0.5f, 0.5f, 1.0f, 1.0f,
+    -0.5f, 0.5f, 0.0f, 1.0f
   };
 
   unsigned int indictes[] = {
@@ -58,13 +59,17 @@ int main(void)
     2, 3, 0
   };
 
+  GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA));
+  GLCall(glEnable(GL_BLEND));
+
   VertexArray va;
-  VertexBuffer vb(positions, 8 * sizeof(float));
+  VertexBuffer vb(positions, 16 * sizeof(float));
 
   VertexBufferLayout layout;
   /*
     vb 顶点数据是 位置占几个元素，是float还是别的。
   */
+  layout.Push<float>(2);
   layout.Push<float>(2);
   va.AddBuffer(vb, layout);
 
@@ -90,6 +95,13 @@ int main(void)
 
     shader.Bind();
     shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
+
+    Texture texture("res/test.png");
+    /*
+     Bind的时候，插槽是几， shader.SetUniform1i("u_Texture", 0);就是几
+    */
+    texture.Bind();
+    shader.SetUniform1i("u_Texture", 0);
 
     renderer.Draw(va, ib, shader);
 
