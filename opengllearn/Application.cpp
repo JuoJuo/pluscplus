@@ -59,7 +59,7 @@ int main(void)
     2, 3, 0
   };
 
-  GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA));
+  GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
   GLCall(glEnable(GL_BLEND));
 
   VertexArray va;
@@ -96,7 +96,7 @@ int main(void)
     shader.Bind();
     shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
 
-    Texture texture("res/test.png");
+    Texture texture("res/ChernoLogo.png");
     /*
      Bind的时候，插槽是几， shader.SetUniform1i("u_Texture", 0);就是几
     */
