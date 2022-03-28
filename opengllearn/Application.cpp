@@ -10,8 +10,8 @@
 #include "VertexArray.h"
 #include "Shader.h"
 #include "Texture.h"
-#include "vendor/glm/glm.hpp"
-#include "vendor/glm/gtc/matrix_transform.hpp"
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 
 int main(void)
 {
@@ -76,6 +76,7 @@ int main(void)
   va.AddBuffer(vb, layout);
 
   IndexBuffer ib(indictes, 6);
+  glm::mat4 proj = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
 
   Shader shader("res/basic.shader");
   shader.Bind();
@@ -97,6 +98,7 @@ int main(void)
 
     shader.Bind();
     shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
+    shader.SetUniformMat4f("u_MVP", proj);
 
     Texture texture("res/ChernoLogo.png");
     /*
